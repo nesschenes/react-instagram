@@ -2,7 +2,6 @@ import './App.css'
 import LOGO from '../asset/logo.png'
 
 export const App = () => {
-  const name = 'was'
   return (
     <>
       <h1>
