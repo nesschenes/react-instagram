@@ -1,7 +1,8 @@
-import "./App.css";
-import LOGO from "../asset/logo.png";
+import './App.css'
+import LOGO from '../asset/logo.png'
 
 export const App = () => {
+  const name = 'was'
   return (
     <>
       <h1>
@@ -9,5 +10,5 @@ export const App = () => {
       </h1>
       <img src={LOGO} alt="Logo" />
     </>
-  );
-};
+  )
+}
