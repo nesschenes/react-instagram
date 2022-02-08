@@ -24,6 +24,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/eslint-plugin-tslint": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
@@ -44,6 +45,7 @@
     "react-refresh": "^0.11.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.5.5",
+    "uuid": "^8.3.2",
     "webpack": "^5.67.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
@@ -51,8 +53,11 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "firebase": "^9.6.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^5.0.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json}": [
