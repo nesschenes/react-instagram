@@ -4,11 +4,13 @@ import { Post, Props as PostData } from './Post'
 // import { useState, useEffect } from 'react'
 // import { v4 } from 'uuid'
 import { tryGetDocs } from './firebase'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const App = () => {
   const [posts, setPosts] = useState<PostData[]>([])
-  tryGetDocs<PostData>('posts').then((p) => setPosts(p))
+  useEffect(() => {
+    tryGetDocs<PostData>('posts').then((p) => setPosts(p))
+  }, [])
 
   return (
     <>
