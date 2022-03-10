@@ -1,17 +1,10 @@
 import './App.css'
 import NAV from '../asset/nav-instagram.png'
 import { Post, Props as PostData } from './Post'
-// import { useState, useEffect } from 'react'
-// import { v4 } from 'uuid'
-import { tryGetDocs } from './firebase'
-import { useEffect, useState } from 'react'
+import { useDocs } from './firebase'
 
 export const App = () => {
-  const [posts, setPosts] = useState<PostData[]>([])
-  useEffect(() => {
-    tryGetDocs<PostData>('posts').then((p) => setPosts(p))
-  }, [])
-
+  const posts = useDocs<PostData>('posts')
   return (
     <>
       <div className="app--header">

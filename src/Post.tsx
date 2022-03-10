@@ -3,7 +3,7 @@ import './Post.css'
 import { Avatar } from '@material-ui/core'
 
 export type Props = {
-  id: string
+  key: string
   iconUrl: string
   username: string
   caption: string

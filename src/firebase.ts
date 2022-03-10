@@ -10,7 +10,10 @@ import {
   getDoc,
   query,
   QueryConstraint,
+  onSnapshot,
+  FirestoreError,
 } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCUdul7xBXB2NSOErjPh9YEroKobNpe9Bg',
@@ -91,4 +94,22 @@ export const tryGetDocs = async <T>(
     console.error('Error getting documents: ', `${collectionName} `, e)
     return []
   }
+}
+
+export const useDocs = <T>(collectionName: string): T[] => {
+  const [data, setData] = useState<T[]>([])
+  useEffect(() => {
+    const colRef = collection(db, collectionName)
+    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+      setData(snapshot.docs.map((d) => d.data() as T))
+      snapshot.docs.forEach((doc) => {
+        console.log('onsnapshot', doc.data())
+      })
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
+  return data
 }
