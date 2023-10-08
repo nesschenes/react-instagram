@@ -14,6 +14,7 @@ export const App = () => {
       {posts.map((post) => (
         <Post
           key={post.key}
+          id={post.key}
           iconUrl={post.iconUrl}
           username={post.username}
           caption={post.caption}
