@@ -1,6 +1,6 @@
 import React from 'react'
-import './Post.css'
 import { Avatar } from '@material-ui/core'
+import './Post.css'
 
 export type Props = {
   id: string
