@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useDocs } from './firebase'
-import { Post, Props as PostData } from './Post'
+import { useDocs } from '@/firebase'
+import { Post, Props as PostData } from '@components/post/Post'
 
 export const Home: React.FC = () => {
   const posts = useDocs<PostData>('posts')

@@ -6,6 +6,12 @@ module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.tsx'),
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, '..', 'src'),
+      '@components': path.resolve(__dirname, '..', './src/components'),
+      '@pages': path.resolve(__dirname, '..', './src/pages'),
+      '@assets': path.resolve(__dirname, '..', './asset'),
+    },
   },
   output: {
     path: path.resolve(__dirname, '..', './build'),
