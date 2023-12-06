@@ -1,0 +1,12 @@
+export enum SidebarItemType {
+  HOME,
+  SEARCH,
+  EXPLORE,
+  REELS,
+  MESSAGES,
+  NOTIFICATIONS,
+  CREATE,
+  PROFILE,
+  THREADS,
+  MORE,
+}
