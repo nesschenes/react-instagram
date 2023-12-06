@@ -94,6 +94,12 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbarTitle: {
       marginLeft: 10,
     },
+    sidebar: {
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'column',
+    },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
@@ -188,35 +194,36 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {upperSidebarItems.map((item, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>
-                <item.icon />
-              </ListItemIcon>
-              <ListItemText
-                primary={StringUtils.toUpperCamelCase(
-                  SidebarItemType[item.type].toString()
-                )}
-              />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {lowerSidebarItems.map((item, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>
-                <item.icon />
-              </ListItemIcon>
-              <ListItemText
-                primary={StringUtils.toUpperCamelCase(
-                  SidebarItemType[item.type].toString()
-                )}
-              />
-            </ListItem>
-          ))}
-        </List>
+        <div className={classes.sidebar}>
+          <List>
+            {upperSidebarItems.map((item, index) => (
+              <ListItem button key={index}>
+                <ListItemIcon>
+                  <item.icon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={StringUtils.toUpperCamelCase(
+                    SidebarItemType[item.type].toString()
+                  )}
+                />
+              </ListItem>
+            ))}
+          </List>
+          <List>
+            {lowerSidebarItems.map((item, index) => (
+              <ListItem button key={index}>
+                <ListItemIcon>
+                  <item.icon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={StringUtils.toUpperCamelCase(
+                    SidebarItemType[item.type].toString()
+                  )}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
