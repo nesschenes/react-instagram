@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import clsx from 'clsx'
+import { useNavigate } from 'react-router-dom'
 import { SidebarItemType } from '@/types/SidebarItemType'
 import { StringUtils } from '@/utils/StringUtils'
+import { SvgIconTypeMap } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
+// import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 import {
   createStyles,
   makeStyles,
@@ -34,13 +37,16 @@ import SmsIcon from '@material-ui/icons/Sms'
 
 const drawerWidth = 260
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+const useStyles = makeStyles((theme: Theme) => {
+  return createStyles({
     root: {
       display: 'flex',
+      backgroundColor: 'black',
+      color: 'white',
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: 'black',
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -66,6 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
       whiteSpace: 'nowrap',
     },
     drawerOpen: {
+      borderColor: '#2B2B2B',
       width: drawerWidth,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -73,6 +80,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
     },
     drawerClose: {
+      borderColor: '#2B2B2B',
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -88,49 +96,65 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: theme.spacing(0, 1),
+      backgroundColor: 'black',
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
     toolbarTitle: {
-      marginLeft: 10,
+      marginLeft: theme.spacing(2),
+      color: 'white',
     },
     sidebar: {
       height: '100%',
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: 'column',
+      backgroundColor: 'black',
+      color: 'white',
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+      backgroundColor: 'black',
     },
   })
-)
+})
 
 export type Props = {
   content: React.ReactNode
 }
 
-const upperSidebarItems = [
-  { type: SidebarItemType.HOME, icon: HomeIcon },
-  { type: SidebarItemType.SEARCH, icon: SearchIcon },
-  { type: SidebarItemType.EXPLORE, icon: ExploreIcon },
-  { type: SidebarItemType.REELS, icon: MovieIcon },
-  { type: SidebarItemType.MESSAGES, icon: SmsIcon },
-  { type: SidebarItemType.NOTIFICATIONS, icon: FavoriteIcon },
-  { type: SidebarItemType.CREATE, icon: AddBoxIcon },
-  { type: SidebarItemType.PROFILE, icon: AccountCircleIcon },
+type SidebarItemData = {
+  type: SidebarItemType
+  icon: OverridableComponent<SvgIconTypeMap>
+  path: string
+}
+
+const upperSidebarItems: SidebarItemData[] = [
+  { type: SidebarItemType.HOME, icon: HomeIcon, path: '/' },
+  { type: SidebarItemType.SEARCH, icon: SearchIcon, path: '/search' },
+  { type: SidebarItemType.EXPLORE, icon: ExploreIcon, path: '/explore' },
+  { type: SidebarItemType.REELS, icon: MovieIcon, path: '/reels' },
+  { type: SidebarItemType.MESSAGES, icon: SmsIcon, path: '/messages' },
+  {
+    type: SidebarItemType.NOTIFICATIONS,
+    icon: FavoriteIcon,
+    path: '/notifications',
+  },
+  { type: SidebarItemType.CREATE, icon: AddBoxIcon, path: '/create' },
+  { type: SidebarItemType.PROFILE, icon: AccountCircleIcon, path: '/profile' },
 ]
 
-const lowerSidebarItems = [
-  { type: SidebarItemType.THREADS, icon: FingerprintIcon },
-  { type: SidebarItemType.MORE, icon: MenuIcon },
+const lowerSidebarItems: SidebarItemData[] = [
+  { type: SidebarItemType.THREADS, icon: FingerprintIcon, path: '/threads' },
+  { type: SidebarItemType.MORE, icon: MenuIcon, path: 'more' },
 ]
 
 export const Sidebar: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
+  const go = useNavigate()
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -138,6 +162,10 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
 
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  const handleItemClick = (data: SidebarItemData) => {
+    go(data.path)
   }
 
   return (
@@ -193,13 +221,19 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
             )}
           </IconButton>
         </div>
-        <Divider />
+        {/* <Divider /> */}
         <div className={classes.sidebar}>
           <List>
             {upperSidebarItems.map((item, index) => (
-              <ListItem button key={index}>
+              <ListItem
+                button
+                key={index}
+                onClick={() => {
+                  handleItemClick(item)
+                }}
+              >
                 <ListItemIcon>
-                  <item.icon />
+                  <item.icon style={{ color: 'white' }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={StringUtils.toUpperCamelCase(
@@ -213,7 +247,7 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
             {lowerSidebarItems.map((item, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
-                  <item.icon />
+                  <item.icon style={{ color: 'white' }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={StringUtils.toUpperCamelCase(
