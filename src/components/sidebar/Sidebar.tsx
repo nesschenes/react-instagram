@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 import { SidebarItemType } from '@/types/SidebarItemType'
 import { StringUtils } from '@/utils/StringUtils'
-import { SvgIconTypeMap } from '@material-ui/core'
+import { Button, SvgIconTypeMap } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 // import Divider from '@material-ui/core/Divider'
@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme: Theme) => {
       color: 'white',
     },
     appBar: {
+      height: '100px',
+      alignItems: 'left',
+      verticalAlign: 'center',
       zIndex: theme.zIndex.drawer + 1,
       backgroundColor: 'black',
       transition: theme.transitions.create(['width', 'margin'], {
@@ -92,6 +95,7 @@ const useStyles = makeStyles((theme: Theme) => {
       },
     },
     toolbar: {
+      height: '100px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -114,13 +118,14 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      paddingTop: theme.spacing(3),
       backgroundColor: 'black',
     },
   })
 })
 
 export type Props = {
+  header: React.ReactNode
   content: React.ReactNode
 }
 
@@ -168,6 +173,10 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
     go(data.path)
   }
 
+  const handleTitleClick = () => {
+    go('/')
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -186,11 +195,13 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
+            style={{ marginTop: '20px' }}
           >
             <MenuIcon />
           </IconButton>
+          {open && props.header}
           {!open && (
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap style={{ marginTop: '20px' }}>
               Instagram
             </Typography>
           )}
@@ -210,9 +221,9 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
         }}
       >
         <div className={classes.toolbar}>
-          <Typography className={classes.toolbarTitle} variant="h6" noWrap>
+          <Button className={classes.toolbarTitle} onClick={handleTitleClick}>
             Instagram
-          </Typography>
+          </Button>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
@@ -233,7 +244,7 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
                 }}
               >
                 <ListItemIcon>
-                  <item.icon style={{ color: 'white' }} />
+                  <item.icon style={{ color: 'white', marginLeft: '8px' }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={StringUtils.toUpperCamelCase(
@@ -247,7 +258,7 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
             {lowerSidebarItems.map((item, index) => (
               <ListItem button key={index}>
                 <ListItemIcon>
-                  <item.icon style={{ color: 'white' }} />
+                  <item.icon style={{ color: 'white', marginLeft: '8px' }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={StringUtils.toUpperCamelCase(
