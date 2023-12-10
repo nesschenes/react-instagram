@@ -21,7 +21,7 @@ import {
   useTheme,
 } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+// import Typography from '@material-ui/core/Typography'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -119,7 +119,6 @@ const useStyles = makeStyles((theme: Theme) => {
     content: {
       flexGrow: 1,
       paddingTop: theme.spacing(3),
-      backgroundColor: 'black',
     },
   })
 })
@@ -199,12 +198,12 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          {open && props.header}
-          {!open && (
+          {props.header}
+          {/* {!open && (
             <Typography variant="h6" noWrap style={{ marginTop: '20px' }}>
               Instagram
             </Typography>
-          )}
+          )} */}
         </Toolbar>
       </AppBar>
       <Drawer

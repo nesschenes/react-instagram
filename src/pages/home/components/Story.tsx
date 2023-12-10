@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'block',
       height: '100%',
       alignItems: 'center',
-      margin: theme.spacing(1),
+      margin: theme.spacing(1.5),
     },
     icon: {
       width: theme.spacing(7),
@@ -34,8 +34,8 @@ const handleStoryClick = (story: Props) => {
 }
 
 const formatName = (username: string) => {
-  if (username && username.length > 9) {
-    return `${username.substring(0, 8)}..`
+  if (username && username.length > 8) {
+    return `${username.substring(0, 6)}..`
   }
   return username
 }
