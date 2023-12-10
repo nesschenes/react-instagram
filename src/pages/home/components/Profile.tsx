@@ -74,6 +74,20 @@ export const Profile: React.FC<Props> = (props) => {
           tag={data.tag}
         />
       ))}
+      <div
+        style={{
+          color: 'gray',
+          fontSize: '10px',
+          marginLeft: '30px',
+          marginTop: '30px',
+        }}
+      >
+        About Help Press API Jobs Privacy Terms
+        <br />
+        Locations Language Meta Verified
+        <br />
+        <br />© 2023 INSTAGRAM FROM META
+      </div>
     </>
   )
 }
