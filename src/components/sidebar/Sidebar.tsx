@@ -194,7 +194,7 @@ export const Sidebar: React.FC<Props> = (props: Props) => {
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
-            style={{ marginTop: '20px' }}
+            style={{ marginTop: '0px' }}
           >
             <MenuIcon />
           </IconButton>

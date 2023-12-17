@@ -81,7 +81,7 @@ export const Home: React.FC = () => {
         <div className={classes.profile}>
           <Profile
             username="Ness"
-            iconUrl=""
+            iconUrl="asset/avatar/man_01.jpg"
             account="ness.chen1101"
             suggests={suggests}
           />

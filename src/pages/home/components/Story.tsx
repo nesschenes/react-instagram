@@ -47,7 +47,7 @@ export const Story: React.FC<Props> = (props) => {
       <Avatar
         className={classes.icon}
         alt={props.username}
-        src={props.iconUrl}
+        src={props.iconUrl ? `asset/avatar/${props.iconUrl}.jpg` : undefined}
         onClick={() => {
           handleStoryClick(props)
         }}
